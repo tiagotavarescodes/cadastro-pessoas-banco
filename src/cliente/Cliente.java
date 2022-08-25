@@ -5,14 +5,17 @@ public class Cliente {
 	private String nome;
 	private String cpf;
 	
+	
 	public Cliente(String nome, String cpf) {
 		
 		this.nome = nome;
 		this.cpf = cpf;
+		
 	}
+	
 
 	public String getNome() {
-		return nome;
+		return this.nome;
 	}
 
 	public void setNome(String nome) {
@@ -20,12 +23,14 @@ public class Cliente {
 	}
 
 	public String getCpf() {
-		return cpf;
+		return this.cpf;
 	}
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+	
+	
 	
 	
 
