@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import cliente.Cliente;
-import conta.Conta;
+
 
 public class CaixaBanco {
 	
@@ -33,7 +33,7 @@ public class CaixaBanco {
 		
 		switch (operacao) {
 		case 1:
-			criarConta();
+			criaCronta();
 			break;
 		case 2:
 			depositar();
@@ -62,13 +62,13 @@ public class CaixaBanco {
 	
 	public static void criaCronta() {
 		
-		System.out.println("Nome:");
+		System.out.println("\nNome:");
 		String nome = teclado.next();
 		
-		System.out.println("Cpf:");
+		System.out.println("\nCpf:");
 		String cpf = teclado.next();
 		
-		System.out.println("Email:");
+		System.out.println("\nEmail:");
 		String email = teclado.next();
 	
 		Cliente cliente = new Cliente(nome, cpf, email);
@@ -104,9 +104,67 @@ public class CaixaBanco {
 			conta.depositar(valorDeposito);
 			
 		} else {
-			System.out.println("Conta não foi encontrada");
+			System.out.println("Conta não encontrada!");
 		}
 		operacoes();
 	}
-
+	
+	public static void sacar() {
+		System.out.println("Número da conta: ");
+		int numeroConta = teclado.nextInt();
+		
+		Conta conta = encontrarConta(numeroConta);
+		if(conta != null) {
+			System.out.println("Qual valor deseja sacar? ");
+			double valorSaque = teclado.nextDouble();
+			conta.sacar(valorSaque);
+			
+		} else {
+			System.out.println("Conta não encontrada!");
+		}
+		operacoes();
+	}
+		
+		public static void transferir() {
+			System.out.println("Número conta remetente: ");
+			int numeroContaRemetente = teclado.nextInt();
+			
+			Conta contaRemetente = encontrarConta(numeroContaRemetente);
+			if(contaRemetente != null) {
+				System.out.println("Número conta destinatário: ");
+				int numeroContaDestinatario = teclado.nextInt();
+				
+				Conta contaDestinatario = encontrarConta(numeroContaDestinatario);
+				if(contaDestinatario != null) {
+					System.out.println("Valor transferência: ");
+					Double valor = teclado.nextDouble();
+					contaRemetente.transferir(valor, contaDestinatario);
+				}
+				
+			operacoes();
+			}
+		}
+		
+		public static void listar() {
+			if(contasBancarias.size() > 0) {
+				for(Conta c : contasBancarias) {
+					System.out.println(c);				
+					
+									
+				}
+				
+		} else { System.out.println("Não há contas");
+		
+		}
+ }
 }
+				
+				
+			
+			
+		
+		
+		
+	
+
+
