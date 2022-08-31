@@ -3,6 +3,9 @@ package conta;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import cliente.Cliente;
+import conta.Conta;
+
 public class CaixaBanco {
 	
 	static Scanner teclado = new Scanner(System.in);
@@ -57,6 +60,53 @@ public class CaixaBanco {
 		
 	}
 	
+	public static void criaCronta() {
+		
+		System.out.println("Nome:");
+		String nome = teclado.next();
+		
+		System.out.println("Cpf:");
+		String cpf = teclado.next();
+		
+		System.out.println("Email:");
+		String email = teclado.next();
 	
+		Cliente cliente = new Cliente(nome, cpf, email);
+		
+		Conta conta = new Conta(cliente);
+		
+		contasBancarias.add(conta);
+		System.out.println("Conta criada com sucesso!");
+		
+		operacoes();
+	}
+	
+	private static Conta encontrarConta(int numeroConta) {
+		Conta conta = null;
+		if(contasBancarias.size() > 0) {
+			for(Conta c : contasBancarias) {
+				if(c.getNumeroConta() == numeroConta);
+				conta = c;
+			}
+		}
+		return conta;
+			
+	}
+	
+	public static void depositar() {
+		System.out.println("Número da conta: ");
+		int numeroConta = teclado.nextInt();
+		
+		Conta conta = encontrarConta(numeroConta);
+		if(conta != null) {
+			System.out.println("Qual valor deseja depositar? ");
+			double valorDeposito = teclado.nextDouble();
+			conta.depositar(valorDeposito);
+			
+		} else {
+			System.out.println("Conta não foi encontrada");
+		}
+		operacoes();
+	}
 
 }
